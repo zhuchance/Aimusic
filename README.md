@@ -5,7 +5,7 @@
 ## 2018年4月2日晚开始，整体感觉还是有很大难度的，靠着年轻的心和一腔热血。
 ## 希项目目前刚起步望更多的感兴趣的朋友参与
 
-[地址](https://github.com/zhuchance/Aimusic")
+[源码地址](https://github.com/zhuchance/Aimusic")
 
 
 
