@@ -11,7 +11,7 @@
 
 ## 版权
 
-Copyright 2018 zhuchance ，邮件地址(couchance@gmail.com)
+Copyright 2018 zhuchance (couchance@gmail.com)
 
 Apache License 2.0，详情见 [LICENSE](LICENSE) 文件。
 
@@ -19,4 +19,7 @@ Apache License 2.0，详情见 [LICENSE](LICENSE) 文件。
 
 ![donate](./images/john.jpg) 
 
+如果觉得我们志同道合，请支付宝扫描下方的二维码作为物质上的鼓励，谢谢！
+
+![donate](./images/alipay.jpg) 
 
