@@ -19,4 +19,6 @@ Apache License 2.0，详情见 [LICENSE](LICENSE) 文件。
 
 ![donate](./images/john.jpg) 
 
-
+### Add SpleeterGUI-win
+SpleeterGUI[https://github.com/boy1dr/SpleeterGui]
+Spleeter[https://github.com/deezer/spleeter]
