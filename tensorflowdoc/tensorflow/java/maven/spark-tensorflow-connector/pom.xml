@@ -28,7 +28,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.maven.version>3.2.2</scala.maven.version>
-        <scala.binary.version>2.11</scala.binary.version>
+        <scala.binary.version>2.3.3</scala.binary.version>
         <scalatest.maven.version>1.0</scalatest.maven.version>
         <scala.test.version>2.2.6</scala.test.version>
         <maven.compiler.version>3.0</maven.compiler.version>
