@@ -26,11 +26,30 @@ func getpy(strCharacter string) [][]string {
 	newPy.Style = pinyin.Tone2
 	bytpy := pinyin.Pinyin(strCharacter, newPy)
 	fmt.Println(bytpy)
+
 	return bytpy
 }
 
+func getpz() {
+	//pylen := len(getpy(string(allwords())))
+	py := getpy(string(allwords()))
+	for i := 0; i < len(py); i++ {
+
+		fmt.Println(py[i])
+		//if strconv.Atoi(py[i]) <= 3 {
+		//	fmt.Println("平声：", py[i])
+		//}
+		//else  {
+		//	fmt.Println("仄声：", py[i])
+		//}
+		//intpy, err := strconv.Atoi(py[i].regexp.MustCompile("[0-9]+"))
+		//fmt.Println(intpy, err, reflect.TypeOf(intpy))
+	}
+
+}
 
 func main() {
+	//getpz()
 	//fmt.Println(string(allwords()))
 	getpy(string(allwords()))
 }
