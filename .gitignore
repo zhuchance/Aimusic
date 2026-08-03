@@ -1,0 +1,35 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+
+# ---- 敏感配置（真实密钥，切勿提交）----
+.env
+.env.local
+*.pem
+*.key
+
+# ---- 生成产物 ----
+output/*.mid
+output/*.midi
+output/*.wav
+output/*.json
+!output/.gitkeep
+
+# ---- IDE ----
+.idea/
+.vscode/
+*.iml
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db

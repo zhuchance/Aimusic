@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aimusic · AI 作曲</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="logo">🎵</div>
+      <h1>Aimusic</h1>
+      <p class="subtitle">选择主流大模型，用一句话创作属于你的旋律</p>
+    </header>
+
+    <main class="card">
+      <!-- 创作输入区 -->
+      <section class="form">
+        <label class="field">
+          <span class="label">选择模型</span>
+          <select id="modelSelect" class="control">
+            <option value="">加载中…</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">创作主题</span>
+          <textarea id="prompt" class="control" rows="3"
+            placeholder="例如：一首轻快的中国风民谣，描绘江南水乡的清晨"></textarea>
+        </label>
+
+        <div class="row">
+          <label class="field grow">
+            <span class="label">风格（可选）</span>
+            <input id="style" class="control" placeholder="流行 / 古典 / 电子 / 民谣" />
+          </label>
+          <label class="field grow">
+            <span class="label">情绪（可选）</span>
+            <input id="mood" class="control" placeholder="欢快 / 忧伤 / 宁静" />
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="field grow">
+            <span class="label">速度 BPM（可选）</span>
+            <input id="tempo" class="control" type="number" min="40" max="220" placeholder="默认 100" />
+          </label>
+          <label class="field grow">
+            <span class="label">小节数</span>
+            <input id="bars" class="control" type="number" min="4" max="32" value="8" />
+          </label>
+        </div>
+
+        <button id="generateBtn" class="btn-primary">✨ 开始创作</button>
+        <div id="error" class="error" hidden></div>
+      </section>
+
+      <!-- 结果展示区 -->
+      <section id="result" class="result" hidden>
+        <div class="result-head">
+          <div>
+            <h2 id="songTitle">曲名</h2>
+            <p id="songMeta" class="meta">调性 · 速度 · 拍号</p>
+          </div>
+          <div class="actions">
+            <button id="playBtn" class="btn-secondary">▶ 播放</button>
+            <button id="stopBtn" class="btn-ghost" hidden>■ 停止</button>
+            <a id="downloadBtn" class="btn-secondary" download>⬇ 下载 MIDI</a>
+          </div>
+        </div>
+        <p id="songNote" class="note"></p>
+
+        <!-- 简易钢琴卷帘可视化 -->
+        <div class="roll-wrap">
+          <canvas id="pianoRoll" width="880" height="220"></canvas>
+        </div>
+        <p class="hint" id="noteCount"></p>
+      </section>
+
+      <!-- 加载指示 -->
+      <section id="loading" class="loading" hidden>
+        <div class="spinner"></div>
+        <p>AI 正在作曲，请稍候…</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      由大模型生成 · 仅供创作参考 · Apache 2.0
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
