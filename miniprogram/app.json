@@ -1,0 +1,22 @@
+{
+  "pages": ["pages/index/index", "pages/history/history"],
+  "window": {
+    "navigationBarBackgroundColor": "#0f1220",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Aimusic",
+    "backgroundColor": "#0f1220",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#9aa3b8",
+    "selectedColor": "#7c6cff",
+    "backgroundColor": "#1a1e30",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "作曲" },
+      { "pagePath": "pages/history/history", "text": "历史" }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

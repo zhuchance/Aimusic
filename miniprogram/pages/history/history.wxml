@@ -1,0 +1,36 @@
+<view class="app">
+  <view class="head">
+    <text class="head-title">历史记录</text>
+    <view class="head-actions">
+      <button class="btn-ghost head-btn" bindtap="onSync" disabled="{{syncing}}">
+        {{syncing ? '同步中…' : (loggedIn ? '☁ 同步' : '登录并同步')}}
+      </button>
+    </view>
+  </view>
+  <view class="head-tip" wx:if="{{!loggedIn}}">登录后可把历史同步到云端，换手机也能找回。</view>
+
+  <view class="error" wx:if="{{error}}">{{error}}</view>
+
+  <view class="empty" wx:if="{{!items.length}}">
+    <view class="empty-icon">🎼</view>
+    <text>还没有生成记录，去「作曲」页创作一首吧</text>
+  </view>
+
+  <view class="item" wx:for="{{items}}" wx:key="id">
+    <view class="item-main" bindtap="onPlay" data-id="{{item.id}}">
+      <view class="item-title">
+        {{item.title}}
+        <text class="badge" wx:if="{{item.synced}}">云</text>
+        <text class="badge local" wx:else>本</text>
+      </view>
+      <view class="item-meta">{{item.key}} · {{item.tempo}} BPM · {{item.notes.length}} 音</view>
+      <view class="item-time">{{item.displayTime}}</view>
+    </view>
+    <view class="item-actions">
+      <button class="btn-secondary" bindtap="onPlay" data-id="{{item.id}}" wx:if="{{playingId !== item.id}}">▶ 播放</button>
+      <button class="btn-secondary" bindtap="onStop" wx:else>■ 停止</button>
+      <button class="btn-secondary" bindtap="onExport" data-id="{{item.id}}">⬇ 导出</button>
+      <button class="btn-ghost" bindtap="onDelete" data-id="{{item.id}}">删除</button>
+    </view>
+  </view>
+</view>

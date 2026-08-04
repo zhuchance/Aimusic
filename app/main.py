@@ -7,16 +7,28 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from . import auth, db
 from .llm import LLMError
-from .schemas import CompositionOut, GenerateRequest, ModelInfo
+from .schemas import (
+    CompositionOut,
+    GenerateRequest,
+    HistoryItemIn,
+    HistoryItemOut,
+    LoginOut,
+    MessageOut,
+    ModelInfo,
+    WxLoginRequest,
+)
 from .services import OUTPUT_DIR, GenerationError, generate_song
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
+
+db.init_db()
 
 app = FastAPI(
     title="Aimusic",
@@ -61,6 +73,47 @@ async def download_midi(filename: str):
         media_type="audio/midi",
         filename=filename,
     )
+
+
+# ========================= 登录 / 云同步历史 =========================
+@app.post("/api/wx/login", response_model=LoginOut)
+async def wx_login(req: WxLoginRequest):
+    """微信小程序登录：code 换 openid，签发 token。"""
+    try:
+        openid, token = await auth.login_with_code(req.code)
+    except auth.AuthError as exc:
+        raise HTTPException(status_code=401, detail=str(exc)) from exc
+    return LoginOut(token=token, openid=openid)
+
+
+def current_user(authorization: str = Header(None)) -> dict:
+    """从 Authorization: Bearer <token> 解析当前用户。"""
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="未登录")
+    user = auth.resolve_user(authorization[7:])
+    if user is None:
+        raise HTTPException(status_code=401, detail="登录已失效，请重新登录")
+    return user
+
+
+@app.get("/api/history", response_model=list[HistoryItemOut])
+async def list_history(user: dict = Depends(current_user)):
+    """返回当前用户的历史记录（新到旧）。"""
+    return db.list_history(user["openid"])
+
+
+@app.post("/api/history", response_model=HistoryItemOut)
+async def create_history(item: HistoryItemIn, user: dict = Depends(current_user)):
+    """保存一条历史记录。"""
+    return db.add_history(user["openid"], item)
+
+
+@app.delete("/api/history/{history_id}", response_model=MessageOut)
+async def delete_history(history_id: int, user: dict = Depends(current_user)):
+    """删除一条历史记录。"""
+    if not db.delete_history(user["openid"], history_id):
+        raise HTTPException(status_code=404, detail="记录不存在")
+    return MessageOut(detail="已删除")
 
 
 # ========================= 前端静态页面 =========================

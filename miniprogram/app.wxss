@@ -1,0 +1,14 @@
+page {
+  --bg: #0f1220;
+  --card: #1a1e30;
+  --card-2: #222741;
+  --text: #eef1f8;
+  --text-dim: #9aa3b8;
+  --accent: #7c6cff;
+  --accent-2: #56c8ff;
+  --danger: #f87171;
+  background: radial-gradient(1200px 600px at 20% -10%, #2a2f52 0%, var(--bg) 55%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Roboto, sans-serif;
+  min-height: 100vh;
+}

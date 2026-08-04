@@ -56,7 +56,15 @@ except ParseError:
 from app.main import app
 
 routes = {getattr(r, "path", "") for r in app.routes}
-for need in ("/api/models", "/api/generate", "/api/midi/{filename}", "/"):
+for need in (
+    "/api/models",
+    "/api/generate",
+    "/api/midi/{filename}",
+    "/api/wx/login",
+    "/api/history",
+    "/api/history/{history_id}",
+    "/",
+):
     assert need in routes, f"缺少路由 {need}"
 print("[OK] fastapi：所有关键路由已注册")
 

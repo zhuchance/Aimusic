@@ -1,0 +1,79 @@
+<view class="app">
+  <view class="hero">
+    <view class="logo">🎵</view>
+    <view class="title">Aimusic</view>
+    <view class="subtitle">选择主流大模型，一句话创作你的旋律</view>
+  </view>
+
+  <!-- 创作输入区 -->
+  <view class="card">
+    <view class="field">
+      <text class="label">选择模型</text>
+      <picker mode="selector" range="{{models}}" range-key="display_name" value="{{modelIndex}}" bindchange="onModelChange">
+        <view class="control picker-value {{models.length ? '' : 'placeholder'}}">
+          {{models.length ? models[modelIndex].display_name : '（未配置任何模型，请先在后端 .env 填入 API Key）'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="label">创作主题</text>
+      <textarea class="control" value="{{prompt}}" bindinput="onPromptInput" maxlength="-1"
+        placeholder="例如：一首轻快的中国风民谣，描绘江南水乡的清晨" />
+    </view>
+
+    <view class="row">
+      <view class="field grow">
+        <text class="label">风格（可选）</text>
+        <input class="control" value="{{style}}" bindinput="onStyleInput" placeholder="流行 / 古典 / 电子 / 民谣" />
+      </view>
+      <view class="field grow">
+        <text class="label">情绪（可选）</text>
+        <input class="control" value="{{mood}}" bindinput="onMoodInput" placeholder="欢快 / 忧伤 / 宁静" />
+      </view>
+    </view>
+
+    <view class="row">
+      <view class="field grow">
+        <text class="label">速度 BPM（可选）</text>
+        <input class="control" type="number" value="{{tempo}}" bindinput="onTempoInput" placeholder="默认 100" />
+      </view>
+      <view class="field grow">
+        <text class="label">小节数</text>
+        <input class="control" type="number" value="{{bars}}" bindinput="onBarsInput" placeholder="8" />
+      </view>
+    </view>
+
+    <button class="btn-primary" bindtap="onGenerate" disabled="{{loading || !models.length}}">✨ 开始创作</button>
+    <view class="error" wx:if="{{error}}">{{error}}</view>
+  </view>
+
+  <!-- 加载指示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="spinner"></view>
+    <text>AI 正在作曲，请稍候…</text>
+  </view>
+
+  <!-- 结果展示区 -->
+  <view class="card result" wx:if="{{composition}}">
+    <view class="result-head">
+      <view class="result-info">
+        <view class="song-title">{{composition.title}}</view>
+        <view class="meta">{{composition.key}} · {{composition.tempo}} BPM · {{composition.time_signature}}</view>
+      </view>
+      <view class="actions">
+        <button class="btn-secondary" bindtap="onPlay" wx:if="{{!isPlaying}}">▶ 播放</button>
+        <button class="btn-secondary" bindtap="onStop" wx:if="{{isPlaying}}">■ 停止</button>
+        <button class="btn-secondary" bindtap="onShareMidi">⬇ 导出</button>
+      </view>
+    </view>
+    <view class="note" wx:if="{{composition.composer_note}}">{{composition.composer_note}}</view>
+
+    <view class="roll-wrap">
+      <scroll-view scroll-x class="roll-scroll" enhanced show-scrollbar="{{false}}">
+        <canvas type="2d" id="pianoRoll" class="piano-roll" style="{{rollStyle}}"></canvas>
+      </scroll-view>
+    </view>
+    <view class="hint">共 {{composition.notes.length}} 个音符</view>
+  </view>
+</view>

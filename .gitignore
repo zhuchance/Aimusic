@@ -24,6 +24,7 @@ output/*.midi
 output/*.wav
 output/*.json
 !output/.gitkeep
+aimusic.db
 
 # ---- IDE ----
 .idea/

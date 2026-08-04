@@ -1,0 +1,194 @@
+.app {
+  padding: 32rpx 30rpx 60rpx;
+}
+
+/* ---- 顶部 ---- */
+.hero {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+.logo {
+  font-size: 72rpx;
+}
+.title {
+  font-size: 54rpx;
+  letter-spacing: 2rpx;
+  margin: 10rpx 0 8rpx;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitle {
+  color: var(--text-dim);
+  font-size: 26rpx;
+}
+
+/* ---- 卡片 ---- */
+.card {
+  background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+  border: 1rpx solid rgba(255, 255, 255, 0.06);
+  border-radius: 24rpx;
+  padding: 36rpx;
+  box-shadow: 0 18rpx 50rpx rgba(0, 0, 0, 0.35);
+}
+
+/* ---- 表单 ---- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-bottom: 24rpx;
+}
+.label {
+  font-size: 24rpx;
+  color: var(--text-dim);
+}
+.control {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  border-radius: 14rpx;
+  color: var(--text);
+  padding: 18rpx 20rpx;
+  font-size: 28rpx;
+  line-height: 1.4;
+  min-height: 48rpx;
+}
+.picker-value {
+  min-height: 48rpx;
+}
+.picker-value.placeholder {
+  color: var(--text-dim);
+}
+textarea.control {
+  width: 100%;
+  height: 150rpx;
+}
+.row {
+  display: flex;
+  gap: 20rpx;
+}
+.field.grow {
+  flex: 1;
+}
+
+/* ---- 按钮 ---- */
+.btn-primary {
+  width: 100%;
+  padding: 22rpx 0;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 14rpx;
+  line-height: 1.4;
+}
+.btn-primary[disabled] {
+  opacity: 0.55;
+  color: #fff;
+}
+.btn-secondary {
+  margin: 0;
+  padding: 14rpx 28rpx;
+  background: rgba(124, 108, 255, 0.16);
+  color: var(--text);
+  border: 1rpx solid rgba(124, 108, 255, 0.5);
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.4;
+}
+
+/* ---- 错误 ---- */
+.error {
+  margin-top: 20rpx;
+  padding: 16rpx 20rpx;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1rpx solid rgba(248, 113, 113, 0.4);
+  border-radius: 12rpx;
+  color: #fca5a5;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+/* ---- 结果 ---- */
+.result {
+  margin-top: 36rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.08);
+}
+.result-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+.result-info {
+  flex: 1;
+  min-width: 0;
+}
+.song-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  word-break: break-all;
+}
+.meta {
+  color: var(--text-dim);
+  font-size: 26rpx;
+  margin-top: 8rpx;
+}
+.actions {
+  display: flex;
+  gap: 12rpx;
+  align-items: center;
+}
+.note {
+  color: var(--text-dim);
+  font-size: 26rpx;
+  line-height: 1.6;
+  margin: 24rpx 0;
+}
+
+/* ---- 钢琴卷帘（横向滚动） ---- */
+.roll-wrap {
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 14rpx;
+  padding: 12rpx;
+  overflow: hidden;
+}
+.roll-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.piano-roll {
+  display: block;
+}
+.hint {
+  color: var(--text-dim);
+  font-size: 22rpx;
+  margin-top: 12rpx;
+  text-align: center;
+}
+
+/* ---- 加载 ---- */
+.loading {
+  text-align: center;
+  padding: 50rpx 0 20rpx;
+  color: var(--text-dim);
+}
+.spinner {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0 auto 20rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

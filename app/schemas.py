@@ -51,6 +51,45 @@ class ModelInfo(BaseModel):
     display_name: str
 
 
+# ========================= 登录 / 历史记录 =========================
+class WxLoginRequest(BaseModel):
+    """微信小程序登录请求体（wx.login 返回的 code）。"""
+
+    code: str
+
+
+class LoginOut(BaseModel):
+    """登录结果。"""
+
+    token: str
+    openid: str
+
+
+class HistoryItemIn(BaseModel):
+    """新增一条历史记录（来自已生成的曲谱）。"""
+
+    title: str = "Untitled"
+    key: str = "C major"
+    tempo: int = Field(100, ge=40, le=220)
+    time_signature: str = "4/4"
+    composer_note: Optional[str] = None
+    notes: List[NoteOut] = Field(default_factory=list)
+    midi_url: Optional[str] = None
+
+
+class HistoryItemOut(HistoryItemIn):
+    """历史记录（含服务端分配的 id 与创建时间）。"""
+
+    id: int
+    created_at: str
+
+
+class MessageOut(BaseModel):
+    """通用消息响应。"""
+
+    detail: str
+
+
 # ========================= 内部解析结构 =========================
 class RawNote(BaseModel):
     """AI 返回 JSON 中的单个音符（宽容解析）。"""

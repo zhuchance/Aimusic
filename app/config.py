@@ -47,6 +47,10 @@ class Settings(BaseSettings):
     KIMI_MODEL: str = "moonshot-v1-8k"
     KIMI_BASE_URL: str = "https://api.moonshot.cn/v1"
 
+    # ---- 微信小程序登录（云同步历史用，可选）----
+    WX_APPID: Optional[str] = None
+    WX_SECRET: Optional[str] = None
+
     # ---- 生成默认参数 ----
     DEFAULT_TEMPO: int = 100
 
